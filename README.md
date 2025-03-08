@@ -31,6 +31,7 @@ This is a Python-based face recognition application built using the `face_recogn
     - Save processed files (e.g., videos or images with recognized faces).
 
 ## File Structure
+``
 face-recognition-app/
 ├── main.py # Entry point of the application
 ├── face_recognition.py # Core face recognition logic
@@ -39,7 +40,7 @@ face-recognition-app/
 ├── requirements.txt # List of dependencies
 ├── README.md # Project documentation
 └── assets/ # Directory for storing assets (e.g., images, videos)
-
+``
 ## Dependencies
 - The required Python libraries are listed in requirements.txt. Install them using:
     pip install -r requirements.txt
