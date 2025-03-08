@@ -1,5 +1,7 @@
 # Face Recognition App
 
+![Demo](screenshot.png)
+
 This is a Python-based face recognition application built using the `face_recognition` library and the `flet` framework for the user interface. The app allows users to perform face recognition on images, videos, and live webcam feeds.
 
 ## Features
@@ -31,14 +33,13 @@ This is a Python-based face recognition application built using the `face_recogn
     - Save processed files (e.g., videos or images with recognized faces).
 
 ## File Structure
-
-flet-face-recognition/
-    main.py                # Entry point of the application
-    face_rec.py    # Core face recognition logic
-    ui.py                  # Flet UI implementation
-    utils.py               # Utility functions
-    requirements.txt       # List of dependencies
-    assets/                # Directory for storing assets (e.g., images, videos)
+- face-recognition-app/
+    - main.py                # Entry point of the application
+    - face_rec.py    # Core face recognition logic
+    - ui.py                  # Flet UI implementation
+    - utils.py               # Utility functions
+    - requirements.txt       # List of dependencies
+    - assets/                # Directory for storing assets (e.g., images, videos)
 
 ## Dependencies
 - The required Python libraries are listed in requirements.txt. Install them using:
