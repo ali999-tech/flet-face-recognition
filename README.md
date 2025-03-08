@@ -47,7 +47,7 @@ This is a Python-based face recognition application built using the `face_recogn
         - If the known face is in target image it will be in processed image, marked with a rectangle below which will be his name (name of a known image)
         - After processing you can save the processed image wherever you want
     - Face Recognition from a webcam:
-        - Upload an image (or images) of a person to recognize in a camera
+        - Upload an image (or images) of a person to recognize in a camera feed
         - Start a webcam
         - If the person (or people) is in camera feed, he will be marked with his name (name of uploaded image)
         - Webcam video will be in the flet interface itself
