@@ -34,7 +34,23 @@ This is a Python-based face recognition application built using the `face_recogn
     - Upload images or videos.
     - Start face recognition on images, videos, or live webcam feed.
     - Save processed files (e.g., videos or images with recognized faces).
-
+    - Face Recognition from a video:
+        - Upload a video where you want to detect faces
+        - Upload the image (or images) of a person that you want to detect in video
+        - Start face recognition (wait until it finishes)
+        - Save the processed video in any directory
+        - If the face is in the video, it will be written on the interface.
+        - The processed video contains the faces marked with a rectangle below which will be the name (if you upload the image of that person)
+    - Face Recognition from an image:
+        - Upload an image where you want to detect faces
+        - Upload the image (or images) of a person that you want to identify in target image
+        - If the known face is in target image it will be in processed image, marked with a rectangle below which will be his name (name of a known image)
+        - After processing you can save the processed image wherever you want
+    - Face Recognition from a webcam:
+        - Upload an image (or images) of a person to recognize in a camera
+        - Start a webcam
+        - If the person (or people) is in camera feed, he will be marked with his name
+        - Webcam video will be in the flet interface itself
 ## File Structure
 - face-recognition-app/
     - main.py                # Entry point of the application
