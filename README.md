@@ -42,8 +42,8 @@ This is a Python-based face recognition application built using the `face_recogn
         - If the face is in the video, it will be written on the interface.
         - The processed video contains the faces marked with a rectangle below which will be the name (if you upload the image of that person)
     - Face Recognition from an image:
-        - Upload an image where you want to detect faces
-        - Upload the image (or images) of a person that you want to identify in target image
+        - Upload an image where you want to detect faces  (target image)
+        - Upload the image (or images) of a person that you want to identify in target image (known images)
         - If the known face is in target image it will be in processed image, marked with a rectangle below which will be his name (name of a known image)
         - After processing you can save the processed image wherever you want
     - Face Recognition from a webcam:
