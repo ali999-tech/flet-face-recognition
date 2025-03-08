@@ -28,21 +28,18 @@ def run_face_recognition_webcam(image_paths, update_frame, stop_event):
     frame_count = 0
 
     while not stop_event.is_set():
-        # Grab a single frame of video
         ret, frame = video_capture.read()
 
-        # Quit if the video capture fails
         if not ret:
             break
 
         frame_count += 1
         if frame_count % frame_skip != 0:
-            continue  # Skip this frame
+            continue  
 
-        # Resize the frame for faster processing
+        # resize the frame for faster processing
         small_frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)
 
-        # Detect faces in the frame
         face_locations = face_recognition.face_locations(small_frame)
         face_encodings = face_recognition.face_encodings(small_frame, face_locations)
 
@@ -56,9 +53,8 @@ def run_face_recognition_webcam(image_paths, update_frame, stop_event):
                     break
             face_names.append(name)
 
-        # Draw rectangles and labels on the frame
         for (top, right, bottom, left), name in zip(face_locations, face_names):
-            # Scale back up face locations since the frame was resized
+            # Make bigger face locations since the frame was resized
             top *= 2
             right *= 2
             bottom *= 2
@@ -69,7 +65,7 @@ def run_face_recognition_webcam(image_paths, update_frame, stop_event):
             font = cv2.FONT_HERSHEY_DUPLEX
             cv2.putText(frame, name, (left + 6, bottom - 6), font, 0.5, (255, 255, 255), 1)
 
-        # Convert the frame to a format that can be displayed in Flet
+        # convert to a format that can be displayed in Flet
         _, buffer = cv2.imencode(".jpg", frame)
         img_bytes = buffer.tobytes()
 
