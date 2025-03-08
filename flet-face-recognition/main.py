@@ -1,5 +1,5 @@
-import flet as ft
+import flet
 from ui import main
 
 if __name__ == "__main__":
-    ft.app(target=main)
+    flet.app(target=main)

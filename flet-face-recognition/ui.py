@@ -1,4 +1,4 @@
-import flet as ft
+import flet
 import threading
 import os
 from face_rec import (
@@ -8,23 +8,22 @@ from face_rec import (
 )
 from utils import get_name_from_filename
 
-def main(page: ft.Page):
+def main(page: flet.Page):
     page.title = "Face Recognition App"
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
-    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+    page.vertical_alignment = flet.MainAxisAlignment.CENTER
+    page.horizontal_alignment = flet.CrossAxisAlignment.CENTER
     page.padding = 20
-    page.theme_mode = ft.ThemeMode.LIGHT  # Light theme
+    page.theme_mode = flet.ThemeMode.LIGHT
 
-    # Gradient background for all pages
-    page.bgcolor = ft.LinearGradient(
-        begin=ft.alignment.top_left,
-        end=ft.alignment.bottom_right,
-        colors=[ft.Colors.BLUE_100, ft.Colors.PURPLE_100, ft.Colors.PINK_100],
+
+    page.bgcolor = flet.LinearGradient(
+        begin=flet.alignment.top_left,
+        end=flet.alignment.bottom_right,
+        colors=[flet.Colors.BLUE_100, flet.Colors.PURPLE_100, flet.Colors.PINK_100],
     )
 
-    # ==================================================
     # First Page: Function Selection
-    # ==================================================
+
     def go_to_video_recognition(e):
         page.clean()
         video_recognition_page()
@@ -42,27 +41,27 @@ def main(page: ft.Page):
         webcam_recognition_page()
 
     # Stylish buttons for the main page
-    first_page = ft.Column(
+    first_page = flet.Column(
         controls=[
-            ft.Card(
-                content=ft.Container(
-                    content=ft.Column(
+            flet.Card(
+                content=flet.Container(
+                    content=flet.Column(
                         controls=[
-                            ft.Icon(name=ft.Icons.VIDEOCAM, size=40, color=ft.Colors.BLUE_700),
-                            ft.Text("Face Recognition from a Video", size=20, weight=ft.FontWeight.BOLD),
-                            ft.ElevatedButton(
+                            flet.Icon(name=flet.Icons.VIDEOCAM, size=40, color=flet.Colors.BLUE_700),
+                            flet.Text("Face Recognition from a Video", size=20, weight=flet.FontWeight.BOLD),
+                            flet.ElevatedButton(
                                 "Start",
                                 on_click=go_to_video_recognition,
                                 width=200,
                                 height=50,
-                                style=ft.ButtonStyle(
-                                    bgcolor=ft.Colors.BLUE_700,
-                                    color=ft.Colors.WHITE,
-                                    shape=ft.RoundedRectangleBorder(radius=10),
+                                style=flet.ButtonStyle(
+                                    bgcolor=flet.Colors.BLUE_700,
+                                    color=flet.Colors.WHITE,
+                                    shape=flet.RoundedRectangleBorder(radius=10),
                                 ),
                             ),
                         ],
-                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                        horizontal_alignment=flet.CrossAxisAlignment.CENTER,
                         spacing=10,
                     ),
                     padding=20,
@@ -70,25 +69,25 @@ def main(page: ft.Page):
                 elevation=10,
                 margin=10,
             ),
-            ft.Card(
-                content=ft.Container(
-                    content=ft.Column(
+            flet.Card(
+                content=flet.Container(
+                    content=flet.Column(
                         controls=[
-                            ft.Icon(name=ft.Icons.IMAGE, size=40, color=ft.Colors.GREEN_700),
-                            ft.Text("Face Recognition from an Image", size=20, weight=ft.FontWeight.BOLD),
-                            ft.ElevatedButton(
+                            flet.Icon(name=flet.Icons.IMAGE, size=40, color=flet.Colors.GREEN_700),
+                            flet.Text("Face Recognition from an Image", size=20, weight=flet.FontWeight.BOLD),
+                            flet.ElevatedButton(
                                 "Start",
                                 on_click=go_to_image_recognition,
                                 width=200,
                                 height=50,
-                                style=ft.ButtonStyle(
-                                    bgcolor=ft.Colors.GREEN_700,
-                                    color=ft.Colors.WHITE,
-                                    shape=ft.RoundedRectangleBorder(radius=10),
+                                style=flet.ButtonStyle(
+                                    bgcolor=flet.Colors.GREEN_700,
+                                    color=flet.Colors.WHITE,
+                                    shape=flet.RoundedRectangleBorder(radius=10),
                                 ),
                             ),
                         ],
-                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                        horizontal_alignment=flet.CrossAxisAlignment.CENTER,
                         spacing=10,
                     ),
                     padding=20,
@@ -96,25 +95,25 @@ def main(page: ft.Page):
                 elevation=10,
                 margin=10,
             ),
-            ft.Card(
-                content=ft.Container(
-                    content=ft.Column(
+            flet.Card(
+                content=flet.Container(
+                    content=flet.Column(
                         controls=[
-                            ft.Icon(name=ft.Icons.CAMERA_ALT, size=40, color=ft.Colors.ORANGE_700),
-                            ft.Text("Face Recognition from Webcam", size=20, weight=ft.FontWeight.BOLD),
-                            ft.ElevatedButton(
+                            flet.Icon(name=flet.Icons.CAMERA_ALT, size=40, color=flet.Colors.ORANGE_700),
+                            flet.Text("Face Recognition from Webcam", size=20, weight=flet.FontWeight.BOLD),
+                            flet.ElevatedButton(
                                 "Start",
                                 on_click=go_to_webcam_recognition,
                                 width=200,
                                 height=50,
-                                style=ft.ButtonStyle(
-                                    bgcolor=ft.Colors.ORANGE_700,
-                                    color=ft.Colors.WHITE,
-                                    shape=ft.RoundedRectangleBorder(radius=10),
+                                style=flet.ButtonStyle(
+                                    bgcolor=flet.Colors.ORANGE_700,
+                                    color=flet.Colors.WHITE,
+                                    shape=flet.RoundedRectangleBorder(radius=10),
                                 ),
                             ),
                         ],
-                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                        horizontal_alignment=flet.CrossAxisAlignment.CENTER,
                         spacing=10,
                     ),
                     padding=20,
@@ -124,21 +123,19 @@ def main(page: ft.Page):
             ),
         ],
         spacing=20,
-        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        horizontal_alignment=flet.CrossAxisAlignment.CENTER,
     )
 
-    # ==================================================
     # Video Recognition Page
-    # ==================================================
     def video_recognition_page():
-        video_upload = ft.FilePicker(on_result=lambda e: update_video_file_path(e))
-        lmm_image_upload = ft.FilePicker(on_result=lambda e: update_lmm_image_path(e))
-        download_picker = ft.FilePicker(on_result=lambda e: save_processed_video(e))
-        video_file_path = ft.Ref[str]()
+        video_upload = flet.FilePicker(on_result=lambda e: update_video_file_path(e))
+        lmm_image_upload = flet.FilePicker(on_result=lambda e: update_lmm_image_path(e))
+        download_picker = flet.FilePicker(on_result=lambda e: save_processed_video(e))
+        video_file_path = flet.Ref[str]()
         image_paths = []
-        progress = ft.ProgressBar(visible=False, value=0, width=400)
-        status_text = ft.Text()
-        found_names_text = ft.Text(size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_700)
+        progress = flet.ProgressBar(visible=False, value=0, width=400)
+        status_text = flet.Text()
+        found_names_text = flet.Text(size=18, weight=flet.FontWeight.BOLD, color=flet.Colors.GREEN_700)
 
         def update_video_file_path(e):
             if e.files:
@@ -181,13 +178,13 @@ def main(page: ft.Page):
 
         def start_processing(e):
             if not video_file_path.value or not image_paths:
-                page.snack_bar = ft.SnackBar(ft.Text("Please upload all files"))
+                page.snack_bar = flet.SnackBar(flet.Text("Please upload all files"))
                 page.snack_bar.open = True
                 return
 
             progress.visible = True
             status_text.value = "Processing video..."
-            found_names_text.value = ""  # Reset found names text
+            found_names_text.value = ""  # reset found names text
             page.update()
 
             def update_progress(value):
@@ -198,94 +195,94 @@ def main(page: ft.Page):
                 run_face_recognition_video(
                     video_file_path.value,
                     image_paths,
-                    "temp_processed_video.mp4",  # Temporary file
+                    "temp_processed_video.mp4", 
                     update_progress,
-                    update_found_names,  # Pass the callback to update found names
+                    update_found_names,  #pass the callback to update found names
                 )
                 status_text.value = "Processing complete! Choose a location to save the video."
-                page.snack_bar = ft.SnackBar(ft.Text("Processing complete!"))
+                page.snack_bar = flet.SnackBar(flet.Text("Processing complete!"))
                 page.snack_bar.open = True
 
-                # Open the file picker to choose the download location
+                #open the file picker to choose the download location
                 download_picker.save_file(file_name="processed_video.mp4")
             except Exception as ex:
                 status_text.value = f"Error: {str(ex)}"
-                page.snack_bar = ft.SnackBar(ft.Text(f"Error: {str(ex)}"))
+                page.snack_bar = flet.SnackBar(flet.Text(f"Error: {str(ex)}"))
                 page.snack_bar.open = True
             finally:
                 progress.visible = False
                 page.update()
 
         page.add(
-            ft.Column(
+            flet.Column(
                 controls=[
-                    ft.ElevatedButton(
+                    flet.ElevatedButton(
                         "Back to Main Page",
                         on_click=go_to_main_page,
-                        style=ft.ButtonStyle(
-                            bgcolor=ft.Colors.BLUE_700,
-                            color=ft.Colors.WHITE,
-                            shape=ft.RoundedRectangleBorder(radius=10),
+                        style=flet.ButtonStyle(
+                            bgcolor=flet.Colors.BLUE_700,
+                            color=flet.Colors.WHITE,
+                            shape=flet.RoundedRectangleBorder(radius=10),
                         ),
                     ),
-                    ft.Card(
-                        content=ft.Container(
-                            content=ft.Column(
+                    flet.Card(
+                        content=flet.Container(
+                            content=flet.Column(
                                 controls=[
-                                    ft.Icon(name=ft.Icons.VIDEOCAM, size=40, color=ft.Colors.BLUE_700),
-                                    ft.Text("Upload Video", size=20, weight=ft.FontWeight.BOLD),
-                                    ft.ElevatedButton(
+                                    flet.Icon(name=flet.Icons.VIDEOCAM, size=40, color=flet.Colors.BLUE_700),
+                                    flet.Text("Upload Video", size=20, weight=flet.FontWeight.BOLD),
+                                    flet.ElevatedButton(
                                         "Upload Video",
                                         on_click=lambda _: video_upload.pick_files(),
                                         width=200,
                                         height=50,
-                                        style=ft.ButtonStyle(
-                                            bgcolor=ft.Colors.BLUE_700,
-                                            color=ft.Colors.WHITE,
-                                            shape=ft.RoundedRectangleBorder(radius=10),
+                                        style=flet.ButtonStyle(
+                                            bgcolor=flet.Colors.BLUE_700,
+                                            color=flet.Colors.WHITE,
+                                            shape=flet.RoundedRectangleBorder(radius=10),
                                         ),
                                     ),
-                                    ft.Icon(name=ft.Icons.IMAGE, size=40, color=ft.Colors.GREEN_700),
-                                    ft.Text("Upload Images of Faces", size=20, weight=ft.FontWeight.BOLD),
-                                    ft.ElevatedButton(
+                                    flet.Icon(name=flet.Icons.IMAGE, size=40, color=flet.Colors.GREEN_700),
+                                    flet.Text("Upload Images of Faces", size=20, weight=flet.FontWeight.BOLD),
+                                    flet.ElevatedButton(
                                         "Upload Images",
                                         on_click=lambda _: lmm_image_upload.pick_files(),
                                         width=200,
                                         height=50,
-                                        style=ft.ButtonStyle(
-                                            bgcolor=ft.Colors.GREEN_700,
-                                            color=ft.Colors.WHITE,
-                                            shape=ft.RoundedRectangleBorder(radius=10),
+                                        style=flet.ButtonStyle(
+                                            bgcolor=flet.Colors.GREEN_700,
+                                            color=flet.Colors.WHITE,
+                                            shape=flet.RoundedRectangleBorder(radius=10),
                                         ),
                                     ),
-                                    ft.ElevatedButton(
+                                    flet.ElevatedButton(
                                         "Start Face Recognition",
                                         on_click=start_processing,
                                         width=200,
                                         height=50,
-                                        style=ft.ButtonStyle(
-                                            bgcolor=ft.Colors.ORANGE_700,
-                                            color=ft.Colors.WHITE,
-                                            shape=ft.RoundedRectangleBorder(radius=10),
+                                        style=flet.ButtonStyle(
+                                            bgcolor=flet.Colors.ORANGE_700,
+                                            color=flet.Colors.WHITE,
+                                            shape=flet.RoundedRectangleBorder(radius=10),
                                         ),
                                     ),
                                     progress,
                                     status_text,
-                                    found_names_text,  # Display found names here
-                                    ft.ElevatedButton(
+                                    found_names_text,  #display found names here
+                                    flet.ElevatedButton(
                                         "Save Processed Video",
                                         on_click=lambda _: download_picker.save_file(file_name="processed_video.mp4"),
                                         width=200,
                                         height=50,
-                                        style=ft.ButtonStyle(
-                                            bgcolor=ft.Colors.PURPLE_700,
-                                            color=ft.Colors.WHITE,
-                                            shape=ft.RoundedRectangleBorder(radius=10),
+                                        style=flet.ButtonStyle(
+                                            bgcolor=flet.Colors.PURPLE_700,
+                                            color=flet.Colors.WHITE,
+                                            shape=flet.RoundedRectangleBorder(radius=10),
                                         ),
                                     ),
                                 ],
                                 spacing=10,
-                                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                                horizontal_alignment=flet.CrossAxisAlignment.CENTER,
                             ),
                             padding=20,
                         ),
@@ -294,23 +291,22 @@ def main(page: ft.Page):
                     ),
                 ],
                 spacing=20,
-                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                horizontal_alignment=flet.CrossAxisAlignment.CENTER,
             ),
             video_upload,
             lmm_image_upload,
             download_picker,
         )
 
-    # ==================================================
-    # Image Recognition Page
-    # ==================================================
+    #   image recognition page
+
     def image_recognition_page():
-        target_image_upload = ft.FilePicker(on_result=lambda e: update_target_image_path(e))
-        known_image_upload = ft.FilePicker(on_result=lambda e: update_known_image_path(e))
-        download_picker = ft.FilePicker(on_result=lambda e: save_processed_image(e))
-        target_image_path = ft.Ref[str]()
+        target_image_upload = flet.FilePicker(on_result=lambda e: update_target_image_path(e))
+        known_image_upload = flet.FilePicker(on_result=lambda e: update_known_image_path(e))
+        download_picker = flet.FilePicker(on_result=lambda e: save_processed_image(e))
+        target_image_path = flet.Ref[str]()
         known_image_paths = []
-        status_text = ft.Text()
+        status_text = flet.Text()
 
         def update_target_image_path(e):
             if e.files:
@@ -346,7 +342,7 @@ def main(page: ft.Page):
 
         def start_processing(e):
             if not target_image_path.value or not known_image_paths:
-                page.snack_bar = ft.SnackBar(ft.Text("Please upload all files"))
+                page.snack_bar = flet.SnackBar(flet.Text("Please upload all files"))
                 page.snack_bar.open = True
                 return
 
@@ -354,89 +350,88 @@ def main(page: ft.Page):
                 run_face_recognition_image(
                     target_image_path.value,
                     known_image_paths,
-                    "temp_processed_image.jpg",  # Temporary file
+                    "temp_processed_image.jpg",
                 )
                 status_text.value = "Processing complete! Choose a location to save the image."
-                page.snack_bar = ft.SnackBar(ft.Text("Processing complete!"))
+                page.snack_bar = flet.SnackBar(flet.Text("Processing complete!"))
                 page.snack_bar.open = True
 
-                # Open the file picker to choose the download location
                 download_picker.save_file(file_name="processed_image.jpg")
             except Exception as ex:
                 status_text.value = f"Error: {str(ex)}"
-                page.snack_bar = ft.SnackBar(ft.Text(f"Error: {str(ex)}"))
+                page.snack_bar = flet.SnackBar(flet.Text(f"Error: {str(ex)}"))
                 page.snack_bar.open = True
             finally:
                 page.update()
 
         page.add(
-            ft.Column(
+            flet.Column(
                 controls=[
-                    ft.ElevatedButton(
+                    flet.ElevatedButton(
                         "Back to Main Page",
                         on_click=go_to_main_page,
-                        style=ft.ButtonStyle(
-                            bgcolor=ft.Colors.BLUE_700,
-                            color=ft.Colors.WHITE,
-                            shape=ft.RoundedRectangleBorder(radius=10),
+                        style=flet.ButtonStyle(
+                            bgcolor=flet.Colors.BLUE_700,
+                            color=flet.Colors.WHITE,
+                            shape=flet.RoundedRectangleBorder(radius=10),
                         ),
                     ),
-                    ft.Card(
-                        content=ft.Container(
-                            content=ft.Column(
+                    flet.Card(
+                        content=flet.Container(
+                            content=flet.Column(
                                 controls=[
-                                    ft.Icon(name=ft.Icons.IMAGE, size=40, color=ft.Colors.GREEN_700),
-                                    ft.Text("Upload Target Image", size=20, weight=ft.FontWeight.BOLD),
-                                    ft.ElevatedButton(
+                                    flet.Icon(name=flet.Icons.IMAGE, size=40, color=flet.Colors.GREEN_700),
+                                    flet.Text("Upload Target Image", size=20, weight=flet.FontWeight.BOLD),
+                                    flet.ElevatedButton(
                                         "Upload Target Image",
                                         on_click=lambda _: target_image_upload.pick_files(),
                                         width=200,
                                         height=50,
-                                        style=ft.ButtonStyle(
-                                            bgcolor=ft.Colors.GREEN_700,
-                                            color=ft.Colors.WHITE,
-                                            shape=ft.RoundedRectangleBorder(radius=10),
+                                        style=flet.ButtonStyle(
+                                            bgcolor=flet.Colors.GREEN_700,
+                                            color=flet.Colors.WHITE,
+                                            shape=flet.RoundedRectangleBorder(radius=10),
                                         ),
                                     ),
-                                    ft.Icon(name=ft.Icons.IMAGE, size=40, color=ft.Colors.BLUE_700),
-                                    ft.Text("Upload Known Images", size=20, weight=ft.FontWeight.BOLD),
-                                    ft.ElevatedButton(
+                                    flet.Icon(name=flet.Icons.IMAGE, size=40, color=flet.Colors.BLUE_700),
+                                    flet.Text("Upload Known Images", size=20, weight=flet.FontWeight.BOLD),
+                                    flet.ElevatedButton(
                                         "Upload Known Images",
                                         on_click=lambda _: known_image_upload.pick_files(),
                                         width=200,
                                         height=50,
-                                        style=ft.ButtonStyle(
-                                            bgcolor=ft.Colors.BLUE_700,
-                                            color=ft.Colors.WHITE,
-                                            shape=ft.RoundedRectangleBorder(radius=10),
+                                        style=flet.ButtonStyle(
+                                            bgcolor=flet.Colors.BLUE_700,
+                                            color=flet.Colors.WHITE,
+                                            shape=flet.RoundedRectangleBorder(radius=10),
                                         ),
                                     ),
-                                    ft.ElevatedButton(
+                                    flet.ElevatedButton(
                                         "Start Face Recognition",
                                         on_click=start_processing,
                                         width=200,
                                         height=50,
-                                        style=ft.ButtonStyle(
-                                            bgcolor=ft.Colors.ORANGE_700,
-                                            color=ft.Colors.WHITE,
-                                            shape=ft.RoundedRectangleBorder(radius=10),
+                                        style=flet.ButtonStyle(
+                                            bgcolor=flet.Colors.ORANGE_700,
+                                            color=flet.Colors.WHITE,
+                                            shape=flet.RoundedRectangleBorder(radius=10),
                                         ),
                                     ),
                                     status_text,
-                                    ft.ElevatedButton(
+                                    flet.ElevatedButton(
                                         "Save Processed Image",
                                         on_click=lambda _: download_picker.save_file(file_name="processed_image.jpg"),
                                         width=200,
                                         height=50,
-                                        style=ft.ButtonStyle(
-                                            bgcolor=ft.Colors.PURPLE_700,
-                                            color=ft.Colors.WHITE,
-                                            shape=ft.RoundedRectangleBorder(radius=10),
+                                        style=flet.ButtonStyle(
+                                            bgcolor=flet.Colors.PURPLE_700,
+                                            color=flet.Colors.WHITE,
+                                            shape=flet.RoundedRectangleBorder(radius=10),
                                         ),
                                     ),
                                 ],
                                 spacing=10,
-                                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                                horizontal_alignment=flet.CrossAxisAlignment.CENTER,
                             ),
                             padding=20,
                         ),
@@ -445,21 +440,20 @@ def main(page: ft.Page):
                     ),
                 ],
                 spacing=20,
-                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                horizontal_alignment=flet.CrossAxisAlignment.CENTER,
             ),
             target_image_upload,
             known_image_upload,
             download_picker,
         )
 
-    # ==================================================
     # Webcam Recognition Page
-    # ==================================================
+
     def webcam_recognition_page():
-        lmm_image_upload = ft.FilePicker(on_result=lambda e: update_lmm_image_path(e))
+        lmm_image_upload = flet.FilePicker(on_result=lambda e: update_lmm_image_path(e))
         image_paths = []
-        status_text = ft.Text()
-        img = ft.Image(width=640, height=480, fit=ft.ImageFit.CONTAIN, visible=False)  # Hide the image initially
+        status_text = flet.Text()
+        img = flet.Image(width=640, height=480, fit=flet.ImageFit.CONTAIN, visible=False)
         stop_event = threading.Event()
 
         def update_lmm_image_path(e):
@@ -470,20 +464,20 @@ def main(page: ft.Page):
 
         def start_webcam(_):
             if not image_paths:
-                page.snack_bar = ft.SnackBar(ft.Text("Please upload images of faces to recognize."))
+                page.snack_bar = flet.SnackBar(flet.Text("Please upload images of faces to recognize."))
                 page.snack_bar.open = True
                 return
 
             status_text.value = "Starting webcam..."
-            img.src_base64 = ""  # Initialize with an empty base64 string to avoid errors
-            img.visible = True  # Show the image when the webcam starts
+            img.src_base64 = ""  # empty base64 string to make no errors
+            img.visible = True  #show the image when the webcam starts
             page.update()
 
             def update_frame(img_base64):
                 img.src_base64 = img_base64
                 page.update()
 
-            # Start the webcam in a separate thread
+            #start the webcam in another thread
             webcam_thread = threading.Thread(
                 target=run_face_recognition_webcam,
                 args=(image_paths, update_frame, stop_event),
@@ -494,75 +488,73 @@ def main(page: ft.Page):
         def stop_webcam(_):
             stop_event.set()
             status_text.value = "Webcam stopped."
-            img.visible = False  # Hide the image when the webcam stops
+            img.visible = False  #remove the image when the webcam stops
             page.update()
 
-        # Create a split layout with buttons on the left and webcam video on the right
         page.add(
-            ft.Row(
+            flet.Row(
                 controls=[
-                    # Left side: Buttons and controls
-                    ft.Column(
+                    flet.Column(
                         controls=[
-                            ft.ElevatedButton(
+                            flet.ElevatedButton(
                                 "Back to Main Page",
                                 on_click=go_to_main_page,
-                                style=ft.ButtonStyle(
-                                    bgcolor=ft.Colors.BLUE_700,
-                                    color=ft.Colors.WHITE,
-                                    shape=ft.RoundedRectangleBorder(radius=10),
+                                style=flet.ButtonStyle(
+                                    bgcolor=flet.Colors.BLUE_700,
+                                    color=flet.Colors.WHITE,
+                                    shape=flet.RoundedRectangleBorder(radius=10),
                                 ),
                             ),
-                            ft.ElevatedButton(
+                            flet.ElevatedButton(
                                 "Upload Images of Faces",
                                 on_click=lambda _: lmm_image_upload.pick_files(),
                                 width=200,
                                 height=50,
-                                style=ft.ButtonStyle(
-                                    bgcolor=ft.Colors.ORANGE_700,
-                                    color=ft.Colors.WHITE,
-                                    shape=ft.RoundedRectangleBorder(radius=10),
+                                style=flet.ButtonStyle(
+                                    bgcolor=flet.Colors.ORANGE_700,
+                                    color=flet.Colors.WHITE,
+                                    shape=flet.RoundedRectangleBorder(radius=10),
                                 ),
                             ),
-                            ft.ElevatedButton(
+                            flet.ElevatedButton(
                                 "Start Webcam",
                                 on_click=start_webcam,
                                 width=200,
                                 height=50,
-                                style=ft.ButtonStyle(
-                                    bgcolor=ft.Colors.GREEN_700,
-                                    color=ft.Colors.WHITE,
-                                    shape=ft.RoundedRectangleBorder(radius=10),
+                                style=flet.ButtonStyle(
+                                    bgcolor=flet.Colors.GREEN_700,
+                                    color=flet.Colors.WHITE,
+                                    shape=flet.RoundedRectangleBorder(radius=10),
                                 ),
                             ),
-                            ft.ElevatedButton(
+                            flet.ElevatedButton(
                                 "Stop Webcam",
                                 on_click=stop_webcam,
                                 width=200,
                                 height=50,
-                                style=ft.ButtonStyle(
-                                    bgcolor=ft.Colors.RED_700,
-                                    color=ft.Colors.WHITE,
-                                    shape=ft.RoundedRectangleBorder(radius=10),
+                                style=flet.ButtonStyle(
+                                    bgcolor=flet.Colors.RED_700,
+                                    color=flet.Colors.WHITE,
+                                    shape=flet.RoundedRectangleBorder(radius=10),
                                 ),
                             ),
                             status_text,
                         ],
                         spacing=20,
-                        alignment=ft.MainAxisAlignment.START,
-                        expand=True,  # Allow the column to take up available space
+                        alignment=flet.MainAxisAlignment.START,
+                        expand=True, 
                     ),
                     # Right side: Webcam video
-                    ft.Container(
+                    flet.Container(
                         content=img,
-                        alignment=ft.alignment.center,
-                        expand=True,  # Allow the container to take up available space
+                        alignment=flet.alignment.center,
+                        expand=True,
                     ),
                 ],
                 spacing=20,
-                expand=True,  # Allow the row to take up the full height and width of the page
+                expand=True,  # the row takes full height and width of the page
             ),
             lmm_image_upload,
         )
-    # Start with the first page
+
     page.add(first_page)

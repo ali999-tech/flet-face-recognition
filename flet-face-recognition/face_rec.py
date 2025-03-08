@@ -12,7 +12,7 @@ def run_face_recognition_webcam(image_paths, update_frame, stop_event):
     for image_path in image_paths:
         image = face_recognition.load_image_file(image_path)
         face_encodings = face_recognition.face_encodings(image)
-        if face_encodings:  # Ensure at least one face is found
+        if face_encodings:  # at least one face is found
             known_faces.append(face_encodings[0])
             known_names.append(get_name_from_filename(image_path))
 
@@ -80,7 +80,7 @@ def run_face_recognition_webcam(image_paths, update_frame, stop_event):
         if callable(update_frame):
             update_frame(img_base64)
 
-    # Release the webcam and close OpenCV windows
+    # Release the webcam and close cv windows
     video_capture.release()
     cv2.destroyAllWindows()
 
@@ -99,33 +99,32 @@ def run_face_recognition_video(video_path, image_paths, output_video_path, updat
     if output_dir and not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    # Use a more widely supported codec (e.g., 'mp4v' for MP4 files)
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     output_movie = cv2.VideoWriter(output_video_path, fourcc, frame_rate, (frame_width, frame_height))
 
     if not output_movie.isOpened():
         raise ValueError(f"Could not create output video file: {output_video_path}")
 
-    # Load images and create face encodings
+
     known_faces = []
     known_names = []
 
     for image_path in image_paths:
         image = face_recognition.load_image_file(image_path)
         face_encodings = face_recognition.face_encodings(image)
-        if face_encodings:  # Ensure at least one face is found
+        if face_encodings:  # aasfds
             known_faces.append(face_encodings[0])
             known_names.append(get_name_from_filename(image_path))
 
     if not known_faces:
         raise ValueError("No faces found in the uploaded images.")
 
-    # Initialize variables
+  
     face_locations = []
     face_encodings = []
     face_names = []
     frame_number = 0
-    found_names = set()  # Track unique names found in the video
+    found_names = set()  # Save unique names found in the video
 
     while True:
         ret, frame = input_movie.read()
@@ -133,11 +132,11 @@ def run_face_recognition_video(video_path, image_paths, output_video_path, updat
         if not ret:
             break
 
-        # Update progress
+        # update progress
         if callable(update_progress):
             update_progress(frame_number / length)
 
-        # Detect faces in the frame
+        # detect faces in the frame
         face_locations = face_recognition.face_locations(frame)
         face_encodings = face_recognition.face_encodings(frame, face_locations)
 
@@ -152,7 +151,7 @@ def run_face_recognition_video(video_path, image_paths, output_video_path, updat
                     break
             face_names.append(name)
 
-        # Draw rectangles and labels on the frame
+        #   draw rectangles and labels on the frame
         for (top, right, bottom, left), name in zip(face_locations, face_names):
             cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
             cv2.rectangle(frame, (left, bottom - 25), (right, bottom), (0, 0, 255), cv2.FILLED)
@@ -169,12 +168,10 @@ def run_face_recognition_video(video_path, image_paths, output_video_path, updat
     output_movie.release()
 
 def run_face_recognition_image(target_image_path, known_image_paths, output_image_path):
-    # Load the target image
     target_image = face_recognition.load_image_file(target_image_path)
     target_face_locations = face_recognition.face_locations(target_image)
     target_face_encodings = face_recognition.face_encodings(target_image, target_face_locations)
 
-    # Load known images and create face encodings
     known_faces = []
     known_names = []
 
@@ -199,12 +196,10 @@ def run_face_recognition_image(target_image_path, known_image_paths, output_imag
                 break
         face_names.append(name)
 
-    # Draw rectangles and labels on the target image
     for (top, right, bottom, left), name in zip(target_face_locations, face_names):
         cv2.rectangle(target_image, (left, top), (right, bottom), (0, 0, 255), 2)
         cv2.rectangle(target_image, (left, bottom - 25), (right, bottom), (0, 0, 255), cv2.FILLED)
         font = cv2.FONT_HERSHEY_DUPLEX
         cv2.putText(target_image, name, (left + 6, bottom - 6), font, 0.5, (255, 255, 255), 1)
 
-    # Save the output image
     cv2.imwrite(output_image_path, cv2.cvtColor(target_image, cv2.COLOR_RGB2BGR))
