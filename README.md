@@ -1,6 +1,8 @@
 # Face Recognition App
 
-![Demo](screenshot.png)
+![First](screenshot.png)
+![Video](screenshot2.png)
+![Image](screenshot3.png)
 
 This is a Python-based face recognition application built using the `face_recognition` library and the `flet` framework for the user interface. The app allows users to perform face recognition on images, videos, and live webcam feeds.
 
