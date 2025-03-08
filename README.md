@@ -18,17 +18,17 @@ This is a Python-based face recognition application built using the `face_recogn
 
 ## Installation
 1. Clone the repository:
-    - git clone https://github.com/your-username/face-recognition-app.git
+    - ``git clone https://github.com/your-username/face-recognition-app.git``
 
 2. Navigate to the project directory:
-    - cd face-recognition-app
+    - ``cd face-recognition-app``
 
 3. Install the required dependencies:
-    - pip install -r requirements.txt
+    - ``pip install -r requirements.txt``
 
 ## Usage
 1. Run the application:
-    - python main.py
+    - ``python main.py``
 2. Use the interface to:
     - Upload images or videos.
     - Start face recognition on images, videos, or live webcam feed.
