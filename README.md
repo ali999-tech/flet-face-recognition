@@ -3,6 +3,7 @@
 ![First](screenshot.png)
 ![Video](screenshot2.png)
 ![Image](screenshot3.png)
+![Webcam](screenshot4.png)
 
 This is a Python-based face recognition application built using the `face_recognition` library and the `flet` framework for the user interface. The app allows users to perform face recognition on images, videos, and live webcam feeds.
 
@@ -41,7 +42,6 @@ This is a Python-based face recognition application built using the `face_recogn
     - ui.py                  # Flet UI implementation
     - utils.py               # Utility functions
     - requirements.txt       # List of dependencies
-    - assets/                # Directory for storing assets (e.g., images, videos)
 
 ## Dependencies
 - The required Python libraries are listed in requirements.txt. Install them using:
